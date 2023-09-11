@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+</head>
+<body>
+  <div id="toast" class="hide">
+    <span id="toast-text"></span>
+</div>
+  <div class="container">
+    <button id="logout-btn" class="btn btn-primary btn-sm" style="float: right">
+      Logout
+    </button>
+  </div>
+  <div style="display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <div class="container mt-4" style="max-width: 600px;">
+      <br><br>
+      
+      <h1 class="mb-4">Expense Tracker</h1>
+      <form id="add-expense-form">
+        <div class="form-group">
+         
+          <label for="amount">Amount</label>
+          <input type="number" class="form-control" id="amount" required>
+        </div>
+        <div class="form-group">
+          <label for="description">Description</label>
+          <input type="text" class="form-control" id="description" required>
+        </div>
+        <!-- <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" class="form-control" id="date" required>
+        </div> -->
+        <div class="form-group">
+          <label for="date">Date</label>
+          <input type="date" class="form-control form-control-sm" id="date" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="category">Category</label>
+          <select class="form-control" id="category" required>
+            <option value="food">Food</option>
+            <option value="travel">Travel</option>
+            <option value="shopping">Shopping</option>
+            <option value="others">Others</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label for="type">Transaction Type</label>
+          <select class="form-control" id="type" required>
+            <option value="expense">Expense</option>
+            <option value="income">Income</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Add Expense</button>
+      </form>
+      <hr />
+      <button class="btn btn-primary btn-sm" id="rzp-button1">
+        Buy permium
+      </button>
+      <h2 id="permiumUser">
+        
+      </h2>
+      
+      <button id="download-btn">Download</button>
+
+
+      
+      
+      <br />
+      <hr />
+
+      <hr />
+      <h2>Leaderboard</h2>
+      <button type="button" class="btn btn-primary" id="leaderboard-btn">
+        View Leaderboard
+      </button>
+      <div id="leaderboard" class="d-none">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">User Name</th>
+              <th scope="col">Total Expenses</th>
+              <th scope="col">Total Income</th>
+            </tr>
+          </thead>
+          <tbody id="totalExpense"></tbody>
+        </table>
+      </div>
+      <hr />
+      <br />
+      <br />
+      <h2>View Expenses and Incomes</h2>
+<form id="view-transactions-form">
+ 
+  
+  <div class="form-group">
+    <label for="time-period">Time Period:</label>
+    <select class="form-control" id="time-period" name="time-period">
+      <option value="daily">Daily</option>
+      <option value="weekly">Weekly</option>
+      <option value="monthly">Monthly</option>
+      <option value="yearly">Yearly</option>
+      <option value="transaction">All time</option>
+    </select>
+    <label for="limit">Row per page</label>
+    <input type="number" value="5" name="limit" id="limit">
+  </div>
+  <button type="submit" class="btn btn-primary">View Transactions</button>
+</form>
+
+      <table class="table mt-4">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Transaction Type</th>
+            <th></th> <!-- Empty header for Delete button column -->
+          </tr>
+        </thead>
+        <tbody id="expense-list">
+          <!-- Expenses will be dynamically added here -->
+        </tbody>
+      </table>
+      <br>
+      <br>
+      <div class="row">
+        <div class="col-sm">
+          <button type="button" class="btn btn-primary" id="prev">Previous</button>
+        </div>
+        <div class="col-sm">
+          <button type="button" class="btn btn-primary float-right" id="next">Next</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+  <script src="dashboard.js"></script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Expense Tracker</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+  <div class="container mt-4">
+    <h1 class="mb-4">Expense Tracker</h1>
+    <form id="add-expense-form">
+      <div class="form-group">
+        <label for="amount">Amount</label>
+        <input type="number" class="form-control" id="amount" required>
+      </div>
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input type="text" class="form-control" id="description" required>
+      </div>
+      <div class="form-group">
+        <label for="date">Date</label>
+        <input type="date" class="form-control" id="date" required>
+      </div>
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select class="form-control" id="category" required>
+          <option value="food">Food</option>
+          <option value="travel">Travel</option>
+          <option value="shopping">Shopping</option>
+          <option value="others">Others</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="type">Transaction Type</label>
+        <select class="form-control" id="type" required>
+          <option value="expense">Expense</option>
+          <option value="income">Income</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-primary">Add Expense</button>
+    </form>
+
+    <table class="table mt-4">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Description</th>
+          <th>Amount</th>
+          <th>Transaction Type</th>
+          <th></th> <-- Empty header for Delete button column --
+        </tr>
+      </thead>
+      <tbody id="expense-list">
+        -- Expenses will be dynamically added here --
+      </tbody>
+    </table>
+  </div>
+
+  <script src="index.js"></script>
+</body>
+</html> -->
